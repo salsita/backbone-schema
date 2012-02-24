@@ -1,4 +1,4 @@
-# backbone-xml
+# backbone-schema
 
 ## Description
 
