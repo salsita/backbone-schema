@@ -50,7 +50,7 @@ function `require()` must exist in the execution context.
 
 ## Example
 
-      var Model = require('../../lib/backbone-schema').SchemaAwareModel;
+      var Model = require('backbone-schema').SchemaAwareModel;
 
       var schema = {
         name: "testing",
@@ -77,44 +77,15 @@ function `require()` must exist in the execution context.
       model.bind('error', error);
       model.bind('change', change);
 
-      logWrap('set {text:\'hello world\'}',
-          function() { model.set({ text: 'hello world' }); }); // fails: 'done' required
-
-      logWrap('set {text:\'hello wrold\', done: true}',
-          function() { model.set({ text: 'hello world', done: true }); }); // OK
-
-      logWrap('set {extra:1}',
-          function() { model.set({ extra: 1 }); }); // OK, extra properties allowed
-
-      logWrap('set {extra:\'test\'}',
-          function() { model.set({ extra: 'test' }); }); // OK, no type checking for extra properties
-
-      logWrap('set {number:1}',
-          function() { model.set({ number: 1 }); }); // OK
-
-      logWrap('set {number:\'test\'}',
-          function() { model.set({ number: 'test' }); }); // fails: 'number' must be numeric
-
-      logWrap('unset \'text\'',
-          function() { model.unset('text'); }); // fails: 'text' is required
-
-      logWrap('unset \'number\'',
-          function() { model.unset('number'); }); // OK
-
-      logWrap('clear',
-          function() { model.clear(); }); // OK
-
-      // logging wrapper
-      function logWrap(action, callback) {
-        console.log('model before "' + action + '" attempt:');
-        console.log(model.attributes);
-
-        console.log('* performing "' + action + '":');
-        callback();
-        console.log('model after "' + action + '" attempt:');
-        console.log(model.attributes);
-        console.log('');
-      }
+      model.set({ text: 'hello world' }); // fails: 'done' required
+      model.set({ text: 'hello world', done: true }); // OK
+      model.set({ extra: 1 }); // OK, extra properties allowed
+      model.set({ extra: 'test' }); // OK, no type checking for extra properties
+      model.set({ number: 1 }); // OK
+      model.set({ number: 'test' }); // fails: 'number' must be numeric
+      model.unset('text'); // fails: 'text' is required
+      model.unset('number'); // OK
+      model.clear(); // OK
 
       function error() {
         console.log('--> error <--');

@@ -34,8 +34,8 @@ describe('Schema Aware Model Testing Module', function() {
           type: "integer"
           // not required
         }
-        // additionalProperties: true by default
       }
+      // additionalProperties: true by default
     };
 
     model = new Model( {}, { schema: schema} );
@@ -56,7 +56,7 @@ describe('Schema Aware Model Testing Module', function() {
   // Test specs
   //
 
-  it('should fail setting data missing a required property', function() {
+  it('should fail to set data missing a required property', function() {
     model.set({ text: 'hello world' });
     expect(model.attributes).toEqual({});
     expect(errorEmitted).toBeTruthy();
@@ -71,7 +71,7 @@ describe('Schema Aware Model Testing Module', function() {
     expect(changeEmitted).toBeTruthy();
   });
 
-  it('should fail setting data with wrong property type', function() {
+  it('should fail to set data with wrong property type', function() {
     model.set({ text: 123, done: true });
     expect(model.attributes).toEqual({});
     expect(errorEmitted).toBeTruthy();
@@ -87,13 +87,14 @@ describe('Schema Aware Model Testing Module', function() {
     expect(changeEmitted).toBeTruthy();
   });
 
-  it('should fail setting data with extra property when extra properties not allowed', function() {
-    schema.properties.additionalPropoerties = false;
+  it('should fail to set data with extra property when extra properties not allowed', function() {
+    schema.additionalProperties = false;
     model = new Model( {}, { schema: schema } );
+    resetEmitted();
     model.bind('change', function() {
       changeEmitted = true;
     });
-    model.bind('error', function() {
+    model.bind('error', function(msg) {
       errorEmitted = true;
     });
     model.set({ text: 'hello world', done: true, extra: 123 });
@@ -120,7 +121,7 @@ describe('Schema Aware Model Testing Module', function() {
     expect(changeEmitted).toBeTruthy();
   });
 
-  it('should fail changing type of property defined in provided schema', function() {
+  it('should fail to change type of property defined in provided schema', function() {
     model.set({ text: 'hello world', done: true });
     expect(model.get('text')).toEqual('hello world');
     expect(model.get('done')).toEqual(true);
@@ -151,7 +152,7 @@ describe('Schema Aware Model Testing Module', function() {
     expect(changeEmitted).toBeTruthy();
   });
 
-  it('should fail unsetting mandatory property', function() {
+  it('should fail to unset mandatory property', function() {
     model.set({ text: 'hello world', done: true });
     expect(model.get('text')).toEqual('hello world');
     expect(model.get('done')).toEqual(true);
