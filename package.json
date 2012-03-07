@@ -1,0 +1,16 @@
+{
+  "name" : "backbone-schema",
+  "description" : "JSON schema validation support for Backbone."
+  "keywords" : ["backbone", "model", "schema"],
+  "homepage" : "https://github.com/salsita/backbone-schema",
+  "version" : "0.1",
+  "author" : "Roman Kaspar <roman@salsitasoft.com> (http://www.salsitasoft.com)",
+  "contributors" : [
+    "Matthew Gertner <matthew@salsitasoft.com> (http://www.salsitasoft.com)"
+  ],
+  "main" : "./lib/backbone-schema",
+  "repository" : {
+    "type" : "git",
+    "url" : "git@github.com:salsita/backbone-schema.git"
+  }
+}
