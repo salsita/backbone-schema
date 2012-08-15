@@ -1,6 +1,6 @@
 {
   "name" : "backbone-schema",
-  "description" : "JSON schema validation support for Backbone."
+  "description" : "JSON schema validation support for Backbone.",
   "keywords" : ["backbone", "model", "schema"],
   "homepage" : "https://github.com/salsita/backbone-schema",
   "version" : "0.1",
